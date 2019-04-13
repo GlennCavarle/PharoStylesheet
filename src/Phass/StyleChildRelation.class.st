@@ -1,7 +1,7 @@
 Class {
 	#name : #StyleChildRelation,
 	#superclass : #StyleRelation,
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

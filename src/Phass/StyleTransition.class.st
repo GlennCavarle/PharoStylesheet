@@ -3,8 +3,8 @@ to be removed ?
 "
 Class {
 	#name : #StyleTransition,
-	#superclass : #Style,
-	#category : #'Phass-Util'
+	#superclass : #StyleStyle,
+	#category : #'Phass-Utils'
 }
 
 { #category : #accessing }

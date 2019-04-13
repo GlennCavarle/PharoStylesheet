@@ -54,7 +54,7 @@ Class {
 		'mediaConditions',
 		'mediaTypeWithConditions'
 	],
-	#category : #'Phass-Parser'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'as yet unclassified' }

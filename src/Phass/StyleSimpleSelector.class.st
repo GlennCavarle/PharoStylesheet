@@ -11,7 +11,7 @@ Class {
 		'nameCount',
 		'pseudoClassCount'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #testing }

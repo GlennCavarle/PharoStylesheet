@@ -4,7 +4,7 @@ Default stylesheet of the styleable (the ui theme)
 Class {
 	#name : #StyleAuthorOrigin,
 	#superclass : #StyleOrigin,
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

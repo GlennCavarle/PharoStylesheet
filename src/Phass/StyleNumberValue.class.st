@@ -1,5 +1,5 @@
 Class {
-	#name : #BlEmValue,
+	#name : #StyleNumberValue,
 	#superclass : #StyleValue,
 	#category : #'Phass-Value'
 }

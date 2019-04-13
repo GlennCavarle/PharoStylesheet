@@ -1,7 +1,7 @@
 Class {
 	#name : #StyleParser,
 	#superclass : #StyleGrammar,
-	#category : #'Phass-Parser'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'grammar value' }

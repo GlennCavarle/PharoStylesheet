@@ -1,11 +1,11 @@
 Class {
-	#name : #BlPercentValue,
+	#name : #StylePercentValue,
 	#superclass : #StyleValue,
 	#category : #'Phass-Value'
 }
 
 { #category : #'as yet unclassified' }
-BlPercentValue >> computeValueFrom: aTargetNode property: aSymbol [
+StylePercentValue >> computeValueFrom: aTargetNode property: aSymbol [
 	aTargetNode owner
 		ifNotNil: [ :p | 
 			| pValue |

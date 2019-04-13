@@ -6,7 +6,7 @@ Class {
 		'conditions',
 		'media'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #accessing }

@@ -17,7 +17,7 @@ Number >> asBlSec [
 
 { #category : #'*Phass' }
 Number >> asPhassValue [
-	^ BlNumberValue value: self
+	^ StyleNumberValue value: self
 ]
 
 { #category : #'*Phass' }

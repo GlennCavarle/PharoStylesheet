@@ -5,7 +5,7 @@ Class {
 		'selectors',
 		'relationships'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

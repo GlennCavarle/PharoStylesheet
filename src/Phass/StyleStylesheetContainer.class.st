@@ -1,37 +1,37 @@
 Class {
-	#name : #StylesheetContainer,
+	#name : #StyleStylesheetContainer,
 	#superclass : #OrderedCollection,
 	#instVars : [
 		'styleable'
 	],
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'as yet unclassified' }
-StylesheetContainer class >> on: aStyleable [
+StyleStylesheetContainer class >> on: aStyleable [
 	^ self new
 		styleable: aStyleable;
 		yourself
 ]
 
 { #category : #'adding/removing' }
-StylesheetContainer >> add: aStylesheet [
+StyleStylesheetContainer >> add: aStylesheet [
 	super add: aStylesheet.
 	
 ]
 
 { #category : #'adding/removing' }
-StylesheetContainer >> addAll: aCollection [
+StyleStylesheetContainer >> addAll: aCollection [
 	super addAll: aCollection.
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> computeStyleNodes [
+StyleStylesheetContainer >> computeStyleNodes [
 	^ self computeStyleNodesFrom: self styleable
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> computeStyleNodesFrom: aNode [
+StyleStylesheetContainer >> computeStyleNodesFrom: aNode [
 	| aStylesheetList parent |
 	aStylesheetList := OrderedCollection new.
 	parent := aNode parent.
@@ -42,7 +42,7 @@ StylesheetContainer >> computeStyleNodesFrom: aNode [
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStylesheetList [
+StyleStylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStylesheetList [
 	| rootNode matchedRules |
 	matchedRules := SortedCollection sortBlock: [ :r1 :r2 | r1 specificity <= r2 specificity ].
 	aStylesheetList addAll: aStyleable stylesheets.
@@ -57,7 +57,7 @@ StylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStyleshee
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStylesheetList ordinal: anInteger [
+StyleStylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStylesheetList ordinal: anInteger [
 	| rootNode matchedRules ordinal|
 	ordinal := anInteger.
 	matchedRules := SortedCollection sortBlock: [ :r1 :r2 | r1 specificity <= r2 specificity ].
@@ -79,37 +79,37 @@ StylesheetContainer >> computeStyleNodesFrom: aStyleable stylesheets: aStyleshee
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> initialize [
+StyleStylesheetContainer >> initialize [
 	super initialize.
-	super add: (Stylesheet origin: StyleOrigin USER).
+	super add: (StyleStylesheet origin: StyleOrigin USER).
 ]
 
 { #category : #'adding/removing' }
-StylesheetContainer >> remove: aStylesheet [
+StyleStylesheetContainer >> remove: aStylesheet [
 	super remove: aStylesheet.
 ]
 
 { #category : #'adding/removing' }
-StylesheetContainer >> removeAll [
+StyleStylesheetContainer >> removeAll [
 	super removeAll.
 ]
 
 { #category : #'adding/removing' }
-StylesheetContainer >> removeAll: aCollection [
+StyleStylesheetContainer >> removeAll: aCollection [
 	super removeAll: aCollection.
 ]
 
 { #category : #accessing }
-StylesheetContainer >> styleable [
+StyleStylesheetContainer >> styleable [
 	^ styleable
 ]
 
 { #category : #accessing }
-StylesheetContainer >> styleable: anObject [
+StyleStylesheetContainer >> styleable: anObject [
 	styleable := anObject
 ]
 
 { #category : #'as yet unclassified' }
-StylesheetContainer >> userStylesheet [
+StyleStylesheetContainer >> userStylesheet [
 	^ self first
 ]

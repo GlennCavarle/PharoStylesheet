@@ -1,10 +1,10 @@
 Class {
-	#name : #BlColorValue,
+	#name : #StyleColorValue,
 	#superclass : #StyleValue,
 	#category : #'Phass-Value'
 }
 
 { #category : #'as yet unclassified' }
-BlColorValue >> defaultAnimation [
+StyleColorValue >> defaultAnimation [
 	^ BlColorTransition new 
 ]

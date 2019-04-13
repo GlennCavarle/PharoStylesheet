@@ -1,7 +1,7 @@
 Class {
 	#name : #StyleOrigin,
 	#superclass : #Object,
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

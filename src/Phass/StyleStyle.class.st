@@ -1,5 +1,5 @@
 Class {
-	#name : #Style,
+	#name : #StyleStyle,
 	#superclass : #Object,
 	#instVars : [
 		'selector',
@@ -7,37 +7,37 @@ Class {
 		'conditions',
 		'ordinal'
 	],
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #comparing }
-Style >> < aStyle [
+StyleStyle >> < aStyle [
 	^ (self compareTo: aStyle) = -1 or: (self specificity = aStyle specificity and: self ordinal < aStyle ordinal)
 ]
 
 { #category : #comparing }
-Style >> <= aStyle [
+StyleStyle >> <= aStyle [
 	^ ((self compareTo: aStyle) = 1) not
 ]
 
 { #category : #comparing }
-Style >> = aStyle [
+StyleStyle >> = aStyle [
 	^ super = aStyle or: [ ((self compareTo: aStyle) = 0
 		and: [ self selector = aStyle selector ]) and: [ self declaration = aStyle declaration ] ]
 ]
 
 { #category : #comparing }
-Style >> > aStyle [
+StyleStyle >> > aStyle [
 	^ (self compareTo: aStyle) = 1 or: (self specificity = aStyle specificity and: self ordinal > aStyle ordinal)
 ]
 
 { #category : #comparing }
-Style >> >= aStyle [
+StyleStyle >> >= aStyle [
 	^ (self compareTo: aStyle) != -1
 ]
 
 { #category : #comparing }
-Style >> compareTo: aStyle [
+StyleStyle >> compareTo: aStyle [
 	self isImportant = aStyle isImportant
 		ifFalse: [ ^ self isImportant
 				ifTrue: [ 1 ]
@@ -55,32 +55,32 @@ Style >> compareTo: aStyle [
 ]
 
 { #category : #accessing }
-Style >> conditions [
+StyleStyle >> conditions [
 	^ conditions
 ]
 
 { #category : #accessing }
-Style >> conditions: anObject [
+StyleStyle >> conditions: anObject [
 	conditions := anObject
 ]
 
 { #category : #accessing }
-Style >> declaration [
+StyleStyle >> declaration [
 	^ declaration
 ]
 
 { #category : #accessing }
-Style >> declaration: anObject [
+StyleStyle >> declaration: anObject [
 	declaration := anObject
 ]
 
 { #category : #testing }
-Style >> isImportant [
+StyleStyle >> isImportant [
 	^ declaration isImportant
 ]
 
 { #category : #testing }
-Style >> matchesStyleable: aStyleable pseudoClassStates: aPseudoClassStateList [
+StyleStyle >> matchesStyleable: aStyleable pseudoClassStates: aPseudoClassStateList [
 	self conditions
 		ifNotNil: [ :cs | 
 			 cs do: [ :c | 
@@ -90,36 +90,36 @@ Style >> matchesStyleable: aStyleable pseudoClassStates: aPseudoClassStateList [
 ]
 
 { #category : #accessing }
-Style >> ordinal [
+StyleStyle >> ordinal [
 	^ ordinal
 ]
 
 { #category : #accessing }
-Style >> ordinal: anObject [
+StyleStyle >> ordinal: anObject [
 	ordinal := anObject
 ]
 
 { #category : #accessing }
-Style >> origin [
+StyleStyle >> origin [
 	^ selector origin
 ]
 
 { #category : #printing }
-Style >> printOn: aStream [
+StyleStyle >> printOn: aStream [
 	self declaration printOn: aStream
 ]
 
 { #category : #accessing }
-Style >> selector [
+StyleStyle >> selector [
 	^ selector
 ]
 
 { #category : #accessing }
-Style >> selector: anObject [
+StyleStyle >> selector: anObject [
 	selector := anObject
 ]
 
 { #category : #accessing }
-Style >> specificity [
+StyleStyle >> specificity [
 	^ selector specificity + (conditions isNotNil and: [ conditions isNotEmpty ]) asBit
 ]

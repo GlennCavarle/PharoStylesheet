@@ -1,14 +1,14 @@
 Class {
 	#name : #StylesheetLoader,
 	#superclass : #StyleGrammar,
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'grammar value' }
 StylesheetLoader >> arrayToken [
 	^ super arrayToken
 		==>
-			[ :nodes | BlArrayValue value: (nodes parsedValue first collect: [ :item | item value ]) ]
+			[ :nodes | StyleArrayValue value: (nodes parsedValue first collect: [ :item | item value ]) ]
 ]
 
 { #category : #'grammar relation' }
@@ -108,14 +108,14 @@ StylesheetLoader >> functionToken [
 { #category : #helper }
 StylesheetLoader >> helperRgba: args [
 	args first value isColor
-		ifTrue: [ ^ BlColorValue value: (args first value alpha: args last value) ]
+		ifTrue: [ ^ StyleColorValue value: (args first value alpha: args last value) ]
 ]
 
 { #category : #'grammar value' }
 StylesheetLoader >> hexcolorToken [
 	^ super hexcolorToken
 		==>
-			[ :nodes | BlColorValue value: (self colorClass fromHexString: nodes inputValue allButFirst) ]
+			[ :nodes | StyleColorValue value: (self colorClass fromHexString: nodes inputValue allButFirst) ]
 ]
 
 { #category : #'grammar selector' }
@@ -136,8 +136,8 @@ StylesheetLoader >> identToken [
 			| val |
 			val := nodes parsedValue.
 			(self colorClass respondsTo: val)
-				ifTrue: [ BlColorValue value: (self colorClass perform: val) ]
-				ifFalse: [ BlSymbolValue value: val ] ]
+				ifTrue: [ StyleColorValue value: (self colorClass perform: val) ]
+				ifFalse: [ StyleSymbolValue value: val ] ]
 ]
 
 { #category : #'grammar value' }
@@ -203,7 +203,7 @@ StylesheetLoader >> nameSelectorToken [
 
 { #category : #'grammar value' }
 StylesheetLoader >> numberToken [
-	^ super numberToken ==> [ :nodes | BlNumberValue value value: nodes parsedValue ]
+	^ super numberToken ==> [ :nodes | StyleNumberValue value value: nodes parsedValue ]
 ]
 
 { #category : #'grammar value' }
@@ -269,7 +269,7 @@ StylesheetLoader >> string [
 
 { #category : #'grammar value' }
 StylesheetLoader >> stringToken [
-	^ super stringToken ==> [ :nodes | BlStringValue value value: nodes parsedValue ]
+	^ super stringToken ==> [ :nodes | StyleStringValue value value: nodes parsedValue ]
 ]
 
 { #category : #grammar }
@@ -277,7 +277,7 @@ StylesheetLoader >> stylesheet [
 	^ super stylesheet
 		==> [ :nodes | 
 			| ss |
-			ss := Stylesheet new.
+			ss := StyleStylesheet new.
 			nodes do: [ :item | item addTo: ss ].
 			ss ]
 ]

@@ -7,7 +7,7 @@ Class {
 		'stylesheet',
 		'transitions'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'adding/removing' }

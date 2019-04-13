@@ -7,5 +7,5 @@ Symbol >> asBl2StyleValue [
 
 { #category : #'*Phass' }
 Symbol >> asPhassValue [
-	^ BlSymbolValue value: self
+	^ StyleSymbolValue value: self
 ]

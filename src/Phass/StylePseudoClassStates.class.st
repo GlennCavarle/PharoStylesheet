@@ -1,25 +1,25 @@
 Class {
-	#name : #BlPseudoClassStates,
+	#name : #StylePseudoClassStates,
 	#superclass : #OrderedCollection,
 	#instVars : [
 		'styleable'
 	],
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'as yet unclassified' }
-BlPseudoClassStates class >> on: aStyleable [
+StylePseudoClassStates class >> on: aStyleable [
 	^ self new
 		styleable: aStyleable;
 		yourself
 ]
 
 { #category : #accessing }
-BlPseudoClassStates >> styleable [
+StylePseudoClassStates >> styleable [
 	^ styleable
 ]
 
 { #category : #accessing }
-BlPseudoClassStates >> styleable: anObject [
+StylePseudoClassStates >> styleable: anObject [
 	styleable := anObject
 ]

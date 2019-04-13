@@ -4,7 +4,7 @@ Styles set on a styleable using setter API
 Class {
 	#name : #StyleUserOrigin,
 	#superclass : #StyleOrigin,
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

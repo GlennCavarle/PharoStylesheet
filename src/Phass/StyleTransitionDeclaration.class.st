@@ -6,7 +6,7 @@ Class {
 		'timingFunction',
 		'delay'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'adding/removing' }

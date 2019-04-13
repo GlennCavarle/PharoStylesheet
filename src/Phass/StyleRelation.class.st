@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'type'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }

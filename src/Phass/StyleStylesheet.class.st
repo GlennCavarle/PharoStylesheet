@@ -1,5 +1,5 @@
 Class {
-	#name : #Stylesheet,
+	#name : #StyleStylesheet,
 	#superclass : #Object,
 	#instVars : [
 		'name',
@@ -8,38 +8,38 @@ Class {
 		'medias',
 		'origin'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'as yet unclassified' }
-Stylesheet class >> origin: anOrigin [
+StyleStylesheet class >> origin: anOrigin [
 	^ self new
 		origin: anOrigin;
 		yourself
 ]
 
 { #category : #comparing }
-Stylesheet >> <= aStylesheet [
+StyleStylesheet >> <= aStylesheet [
 	^ self origin <= aStylesheet origin
 ]
 
 { #category : #comparing }
-Stylesheet >> >= aStylesheet [
+StyleStylesheet >> >= aStylesheet [
 	^ self origin >= aStylesheet origin
 ]
 
 { #category : #accessing }
-Stylesheet >> file [
+StyleStylesheet >> file [
 	^ file
 ]
 
 { #category : #accessing }
-Stylesheet >> file: anObject [
+StyleStylesheet >> file: anObject [
 	file := anObject
 ]
 
 { #category : #'as yet unclassified' }
-Stylesheet >> for: aSelectorString style: aBlock [
+StyleStylesheet >> for: aSelectorString style: aBlock [
 	| theSelectors theRule |
 	theSelectors := StylesheetLoader parseSelectors: aSelectorString.
 	theRule := StyleRule new.
@@ -51,7 +51,7 @@ Stylesheet >> for: aSelectorString style: aBlock [
 ]
 
 { #category : #'initialize-release' }
-Stylesheet >> initialize [
+StyleStylesheet >> initialize [
 	super initialize.
 	rules := OrderedCollection new.
 	medias := OrderedCollection new.
@@ -59,14 +59,14 @@ Stylesheet >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-Stylesheet >> matchingMediaRulesFor: aStyleable [
+StyleStylesheet >> matchingMediaRulesFor: aStyleable [
 	| matchedRules |
 	matchedRules := SortedCollection sortBlock: [ :r1 :r2 | r1 specificity <= r2 specificity ].
 	self medias do: [ :m |  m rules do: [ :r | 
 					r selectors
 						detect: [ :s | s matchesStyleable: aStyleable ]
 						ifFound: [ :s |  matchedRules add:
-									(BlMatchedRule new
+									(StyleMatchedRule new
 										selector: s;
 										declarations: r declarations;
 										transitions: r transitions;
@@ -76,13 +76,13 @@ Stylesheet >> matchingMediaRulesFor: aStyleable [
 ]
 
 { #category : #'as yet unclassified' }
-Stylesheet >> matchingRulesFor: aStyleable [
+StyleStylesheet >> matchingRulesFor: aStyleable [
 	| matchedRules |
 	matchedRules := SortedCollection sortBlock: [ :r1 :r2 | r1 specificity <= r2 specificity ].
 	self rules do: [ :r |  r selectors
 				select: [ :s | s matchesStyleable: aStyleable ]
 				thenDo: [ :s |  matchedRules add:
-							(BlMatchedRule new
+							(StyleMatchedRule new
 								selector: s;
 								declarations: r declarations;
 								transitions: r transitions;
@@ -92,12 +92,12 @@ Stylesheet >> matchingRulesFor: aStyleable [
 ]
 
 { #category : #accessing }
-Stylesheet >> medias [
+StyleStylesheet >> medias [
 	^ medias
 ]
 
 { #category : #accessing }
-Stylesheet >> medias: aCollection [
+StyleStylesheet >> medias: aCollection [
 	aCollection
 		do: [ :r | 
 			r stylesheet: self.
@@ -105,32 +105,32 @@ Stylesheet >> medias: aCollection [
 ]
 
 { #category : #accessing }
-Stylesheet >> name [
+StyleStylesheet >> name [
 	^ name
 ]
 
 { #category : #accessing }
-Stylesheet >> name: anObject [
+StyleStylesheet >> name: anObject [
 	name := anObject
 ]
 
 { #category : #accessing }
-Stylesheet >> origin [
+StyleStylesheet >> origin [
 	^ origin
 ]
 
 { #category : #accessing }
-Stylesheet >> origin: anObject [
+StyleStylesheet >> origin: anObject [
 	origin := anObject
 ]
 
 { #category : #accessing }
-Stylesheet >> rules [
+StyleStylesheet >> rules [
 	^ rules
 ]
 
 { #category : #accessing }
-Stylesheet >> rules: aCollection [
+StyleStylesheet >> rules: aCollection [
 	aCollection
 		do: [ :r | 
 			r stylesheet: self.

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'target'
 	],
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'as yet unclassified' }

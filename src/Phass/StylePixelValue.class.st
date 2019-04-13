@@ -1,5 +1,5 @@
 Class {
-	#name : #BlStringValue,
+	#name : #StylePixelValue,
 	#superclass : #StyleValue,
 	#category : #'Phass-Value'
 }

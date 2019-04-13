@@ -6,7 +6,7 @@ Class {
 		'rules',
 		'stylesheet'
 	],
-	#category : #'Phass-CSS'
+	#category : #'Phass-Core'
 }
 
 { #category : #'adding/removing' }

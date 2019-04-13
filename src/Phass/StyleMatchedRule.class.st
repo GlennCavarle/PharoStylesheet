@@ -1,5 +1,5 @@
 Class {
-	#name : #BlMatchedRule,
+	#name : #StyleMatchedRule,
 	#superclass : #Object,
 	#instVars : [
 		'selector',
@@ -10,14 +10,14 @@ Class {
 	#classVars : [
 		'AkStyleTransition'
 	],
-	#category : #'Phass-Util'
+	#category : #'Phass-Utils'
 }
 
 { #category : #'as yet unclassified' }
-BlMatchedRule >> computedStyles [
+StyleMatchedRule >> computedStyles [
 	^ self declarations
 		collect: [ :d | 
-			Style new
+			StyleStyle new
 				selector: self selector;
 				declaration: d;
 				conditions: self conditions;
@@ -25,7 +25,7 @@ BlMatchedRule >> computedStyles [
 ]
 
 { #category : #'as yet unclassified' }
-BlMatchedRule >> computedTransitions [
+StyleMatchedRule >> computedTransitions [
 	^ self transitions
 		collect: [ :t | StyleTransition new
 				selector: self selector;
@@ -34,46 +34,46 @@ BlMatchedRule >> computedTransitions [
 ]
 
 { #category : #accessing }
-BlMatchedRule >> conditions [
+StyleMatchedRule >> conditions [
 	^ conditions
 ]
 
 { #category : #accessing }
-BlMatchedRule >> conditions: anObject [
+StyleMatchedRule >> conditions: anObject [
 	conditions := anObject
 ]
 
 { #category : #accessing }
-BlMatchedRule >> declarations [
+StyleMatchedRule >> declarations [
 	^ declarations
 ]
 
 { #category : #accessing }
-BlMatchedRule >> declarations: anObject [
+StyleMatchedRule >> declarations: anObject [
 	declarations := anObject
 ]
 
 { #category : #accessing }
-BlMatchedRule >> selector [
+StyleMatchedRule >> selector [
 	^ selector
 ]
 
 { #category : #accessing }
-BlMatchedRule >> selector: anObject [
+StyleMatchedRule >> selector: anObject [
 	selector := anObject
 ]
 
 { #category : #accessing }
-BlMatchedRule >> specificity [
+StyleMatchedRule >> specificity [
 	^ selector specificity
 ]
 
 { #category : #accessing }
-BlMatchedRule >> transitions [
+StyleMatchedRule >> transitions [
 	^ transitions
 ]
 
 { #category : #accessing }
-BlMatchedRule >> transitions: anObject [
+StyleMatchedRule >> transitions: anObject [
 	transitions := anObject
 ]

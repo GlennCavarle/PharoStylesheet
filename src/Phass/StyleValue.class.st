@@ -16,7 +16,7 @@ StyleValue class >> em: aValue [
 
 { #category : #'as yet unclassified' }
 StyleValue class >> ms: aValue [
-	^ StyleDurationValue value: aValue ms
+	^ CssDurationValue value: aValue
 ]
 
 { #category : #'as yet unclassified' }
@@ -31,7 +31,7 @@ StyleValue class >> pt: aValue [
 
 { #category : #'as yet unclassified' }
 StyleValue class >> px: aValue [
-	^ StylePixelValue value: aValue px
+	^ StylePixelValue value: aValue
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,7 +41,7 @@ StyleValue class >> rem: aValue [
 
 { #category : #'as yet unclassified' }
 StyleValue class >> s: aValue [
-	^ StyleDurationValue value: aValue s
+	^ StyleDurationValue value: aValue seconds
 ]
 
 { #category : #'as yet unclassified' }
@@ -74,7 +74,7 @@ StyleValue >> @ anObject [
 
 { #category : #accessing }
 StyleValue >> animation [
-	^ animation ifNil: [ animation := self defaultAnimation ]
+	^ animation
 ]
 
 { #category : #accessing }
@@ -82,33 +82,14 @@ StyleValue >> animation: anObject [
 	animation := anObject
 ]
 
-{ #category : #accessing }
-StyleValue >> apply: aValue on: aTarget property: aSymbol [
-	aTarget perform: aSymbol asMutator with: aValue
-]
-
-{ #category : #accessing }
-StyleValue >> applyOn: aTarget property: aSymbol [
-	| valueToApply |
-	valueToApply := self computeValueFrom: aTarget property: aSymbol.
-	(self transition isNil or: [ self transition duration = 0 ])
-		ifTrue: [ self apply: valueToApply on: aTarget property: aSymbol ]
-		ifFalse: [ self transite: valueToApply on: aTarget property: aSymbol ]
-]
-
 { #category : #'as yet unclassified' }
-StyleValue >> asPhassValue [
+StyleValue >> asBlStyleValue [
 	^ self
 ]
 
 { #category : #accessing }
 StyleValue >> computeValueFrom: aTarget property: aSymbol [
 	^ self 
-]
-
-{ #category : #accessing }
-StyleValue >> defaultAnimation [
-	^ BlNumberTransition new
 ]
 
 { #category : #'as yet unclassified' }
@@ -127,6 +108,11 @@ StyleValue >> initialize [
 
 ]
 
+{ #category : #testing }
+StyleValue >> isFunction [
+	^ false
+]
+
 { #category : #accessing }
 StyleValue >> printOn: aStream [
 	aStream
@@ -139,19 +125,6 @@ StyleValue >> printOn: aStream [
 { #category : #accessing }
 StyleValue >> property: aSymbol of: aTarget [
 	^ aTarget styler perform: aSymbol
-]
-
-{ #category : #accessing }
-StyleValue >> transite: aValue on: aTarget property: aSymbol [
-	| anim |
-	anim := self animation
-		duration: self transition duration;
-		delay: self transition delay;
-		from: (self property: aSymbol of: aTarget);
-		to: aValue;
-		easing:(BlEasing perform:self transition timingFunction);
-		onStepDo: [ :v | self apply: v on: aTarget property: aSymbol ].
-	anim start.
 ]
 
 { #category : #accessing }

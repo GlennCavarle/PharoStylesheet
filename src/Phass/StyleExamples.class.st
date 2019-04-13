@@ -4,10 +4,10 @@ Class {
 	#category : #'Phass-Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 StyleExamples class >> buttons [
 
-	^ StylesheetLoader
+	^ StyleParser
 		parse:
 			'
 	BlButton { 
@@ -35,9 +35,9 @@ StyleExamples class >> buttons [
 	'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 StyleExamples class >> example1 [
-	(StylesheetLoader  
+	(StyleParser 
 		parse:'
 .foo.bar:hovered > .bar:focused, BlButton.blue .text, .box { 
 	opacity: 0.50;
@@ -64,9 +64,9 @@ StyleExamples class >> example1 [
 ') inspect
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 StyleExamples class >> example2 [
-	(StylesheetLoader  
+	(StyleParser  
 		parse:'
 .foo.bar:hovered > .bar:focused, BlButton.blue .text, .box { 
 	opacity: 0.50;
@@ -74,9 +74,9 @@ StyleExamples class >> example2 [
  }') inspect
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 StyleExamples class >> example3WithMedia [
-	(StylesheetLoader  
+	(StyleParser
 		parse:'
 .foo.bar:hovered > .bar:focused, BlButton.blue .text, .box { 
 	opacity: 0.50;
@@ -92,9 +92,9 @@ StyleExamples class >> example3WithMedia [
 ') inspect
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 StyleExamples class >> example4 [
-	^(StylesheetLoader  
+	^(StyleParser
 		parse:'
 		
 .test { 

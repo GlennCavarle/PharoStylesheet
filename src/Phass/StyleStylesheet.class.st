@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+StyleStylesheet class >> fromFile: aFilename [
+	^ self new
+]
+
+{ #category : #'as yet unclassified' }
 StyleStylesheet class >> origin: anOrigin [
 	^ self new
 		origin: anOrigin;
@@ -41,7 +46,7 @@ StyleStylesheet >> file: anObject [
 { #category : #'as yet unclassified' }
 StyleStylesheet >> for: aSelectorString style: aBlock [
 	| theSelectors theRule |
-	theSelectors := StylesheetLoader parseSelectors: aSelectorString.
+	theSelectors := StyleParser parseSelectors: aSelectorString.
 	theRule := StyleRule new.
 	theRule
 		selectors: theSelectors;

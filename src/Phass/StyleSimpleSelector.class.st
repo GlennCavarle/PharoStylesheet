@@ -41,7 +41,7 @@ StyleSimpleSelector >> idCount [
 { #category : #accessing }
 StyleSimpleSelector >> initialize [
 	super initialize.
-	pseudoClasses := OrderedCollection new.
+	pseudoClasses := Dictionary new.
 	styleClasses := OrderedCollection new
 ]
 
@@ -52,7 +52,24 @@ StyleSimpleSelector >> isSimpleSelector [
 
 { #category : #testing }
 StyleSimpleSelector >> matchesPseudoClasseState: aPseudoClassState [
-	^ aPseudoClassState includesAll: pseudoClasses
+	| found |
+	pseudoClasses keysAndValuesDo: [ :sKey :sValue |
+		found := false.
+		aPseudoClassState
+			select: [ :cAssociation | cAssociation key = sKey ]
+			thenDo: [ :cAssociation | | cValue | 
+				sValue 
+					ifNil: [ found := true ]
+					ifNotNil: [ 
+						cValue := cAssociation value.	
+						(sValue respondsTo: cValue)
+							ifTrue: [ (sValue perform: cValue) ifTrue: [ found := true ] ]
+							ifFalse: [ found := cValue = sValue ]
+					].
+			].
+		found ifFalse: [ ^ false ]
+	].
+	^ true
 ]
 
 { #category : #testing }
@@ -63,12 +80,12 @@ StyleSimpleSelector >> matchesStyleClasses: aStyleClassList [
 { #category : #testing }
 StyleSimpleSelector >> matchesStyleable: aStyleable [
 	self matchesOnName
-		ifTrue: [ (self nameMatches: aStyleable className) ifFalse: [ ^ false ] ].
+		ifTrue: [ (self nameMatches: aStyleable styleName) ifFalse: [ ^ false ] ].
 	self matchesOnId
 		ifTrue: [self id = aStyleable styleId ifFalse: [ ^ false ] ].
 	self matchesOnStyleClass
 		ifTrue:[(self matchesStyleClasses: aStyleable styleClasses ) ifFalse: [ ^ false ] ].
-	^ true
+	^ self matchesPseudoClasseState: aStyleable pseudoClasses
 ]
 
 { #category : #testing }
@@ -112,7 +129,7 @@ StyleSimpleSelector >> nameMatches: aClassName [
 	^ name = aClassName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 StyleSimpleSelector >> printOn: aStream [
 	self name ifNotNil: [ :n | aStream nextPutAll: n ].
 	self id ifNotNil: [ :i | aStream nextPutAll: i ].
@@ -122,10 +139,15 @@ StyleSimpleSelector >> printOn: aStream [
 				nextPut: $.;
 				nextPutAll: (cls joinUsing: '.') ].
 	self pseudoClasses
-		ifNotEmpty: [ :pcls | 
+		keysAndValuesDo: [ :k :v | 
 			aStream
 				nextPut: $:;
-				nextPutAll: (pcls joinUsing: ':') ]
+				nextPutAll: k.
+			v ifNotNil: [ 
+				aStream 
+					nextPut: $(;
+					nextPutAll: v printString;
+					nextPut: $) ] ]
 ]
 
 { #category : #accessing }

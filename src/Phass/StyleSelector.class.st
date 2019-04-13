@@ -25,7 +25,7 @@ StyleSelector class >> from: anObject [
 StyleSelector class >> fromSymbol: aSymbol [
 	| parts selector |
 	parts := BlStyleHelper splitSelectorSymbol: aSymbol.
-	selector := StyleSimpleSelector new
+	selector := BlStyleSimpleSelector new
 		name: nil;
 		styleClasses: {parts first asSymbol};
 		id: nil;
@@ -48,13 +48,13 @@ StyleSelector class >> fromSymbols: aSymbolList [
 		do:
 			[ :aSymb | 
 			aSymb = #>
-				ifTrue: [ relationships add: StyleRelation CHILD ]
+				ifTrue: [ relationships add: CSSRelation CHILD ]
 				ifFalse:
 					[ 
 					(aSymb = aSymbolList first) not
-						ifTrue: [ relationships add: StyleRelation DESCENDANT ].
+						ifTrue: [ relationships add: CSSRelation DESCENDANT ].
 					selectors add: (self fromSymbol: aSymb) ] ].
-	^ (StyleCompoundSelector selectors: selectors relationships: relationships)
+	^ (CSSCompoundSelector selectors: selectors relationships: relationships)
 		update;
 		yourself
 ]

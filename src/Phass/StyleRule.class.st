@@ -40,7 +40,7 @@ StyleRule >> declare: anAssoc important: aBoolean [
 		add:
 			(StylePropertyDeclaration new
 				property: anAssoc key;
-				value: anAssoc value asPhassValue;
+				value: anAssoc value asBlStyleValue;
 				rule: self;
 				important: aBoolean;
 				yourself)

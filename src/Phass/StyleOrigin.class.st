@@ -6,20 +6,20 @@ Class {
 
 { #category : #'as yet unclassified' }
 StyleOrigin class >> AUTHOR [
-	^ StyleAuthorOrigin
+	^ CSSAuthorOrigin
 ]
 
 { #category : #'as yet unclassified' }
 StyleOrigin class >> INLINE [
-	^ StyleInlineOrigin
+	^ CSSInlineOrigin
 ]
 
 { #category : #'as yet unclassified' }
 StyleOrigin class >> USER [
-	^ StyleUserOrigin
+	^ CSSUserOrigin
 ]
 
 { #category : #'as yet unclassified' }
 StyleOrigin class >> USER_AGENT [
-	^ StyleUserAgentOrigin
+	^ CSSUserAgentOrigin
 ]

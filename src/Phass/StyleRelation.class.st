@@ -9,12 +9,12 @@ Class {
 
 { #category : #'as yet unclassified' }
 StyleRelation class >> CHILD [
-	^ StyleChildRelation
+	^ CSSChildRelation
 ]
 
 { #category : #'as yet unclassified' }
 StyleRelation class >> DESCENDANT [
-	^ StyleDescendantRelation
+	^ CSSDescendantRelation
 ]
 
 { #category : #'as yet unclassified' }

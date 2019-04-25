@@ -113,6 +113,11 @@ PssValue >> isFunction [
 	^ false
 ]
 
+{ #category : #testing }
+PssValue >> isPixelValue [
+	^ false
+]
+
 { #category : #accessing }
 PssValue >> printOn: aStream [
 	aStream

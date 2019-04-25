@@ -9,12 +9,12 @@ Class {
 
 { #category : #'as yet unclassified' }
 PssRelation class >> CHILD [
-	^ CSSChildRelation
+	^ PssChildRelation
 ]
 
 { #category : #'as yet unclassified' }
 PssRelation class >> DESCENDANT [
-	^ CSSDescendantRelation
+	^ PssDescendantRelation
 ]
 
 { #category : #'as yet unclassified' }

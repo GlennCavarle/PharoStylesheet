@@ -18,7 +18,7 @@ PssParser >> childRelationToken [
 
 { #category : #'grammar selector' }
 PssParser >> classSelectorToken [
-	^ super classSelectorToken ==> [ :nodes | nodes inputValue allButFirst asSymbol ]
+	^ super classSelectorToken ==> [ :nodes | nodes parsedValue second ]
 ]
 
 { #category : #'as yet unclassified' }

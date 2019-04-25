@@ -48,6 +48,43 @@ PssParserTest >> testBorder [
 ]
 
 { #category : #'tests-selectors' }
+PssParserTest >> testChildSelector [
+	| rule selector selector1 selector2 |
+	result := self parse: 'li > a {}'.
+	
+	self assert: result rules size equals: 1.
+	
+	rule := result rules first.
+	self assert: rule declarations isEmpty.
+	self assert: rule selectors size equals: 1.
+	
+	selector := rule selectors first.
+	
+	self assert: selector isSimpleSelector not.
+	
+	"Selector 1"
+	selector1 := selector selectors first.
+	self assert: selector1 matchesOnName.
+	self assert: selector1 name equals: #li.
+	self deny: selector1 matchesOnStyleClass.
+	self deny: selector1 matchesOnId.
+	self assert: selector1 pseudoClassCount equals: 0.
+	
+	"Selector 2"
+	selector2 := selector selectors second.
+	self assert: selector2 matchesOnName.
+	self assert: selector2 name equals: #a.
+	self deny: selector2 matchesOnStyleClass.
+	self deny: selector2 matchesOnId.
+	self assert: selector2 pseudoClassCount equals: 0.
+	
+	"Relationship"
+	self assert: selector relationships size equals: 1.
+	self assert: selector relationships first isChild.
+	
+]
+
+{ #category : #'tests-selectors' }
 PssParserTest >> testClassSelector [
 	| rule selector |
 	result := self parse: '.button {}'.
@@ -106,6 +143,68 @@ PssParserTest >> testColorNames [
 	declaration := rule declarations first.
 	self assert: declaration property equals: #color.
 	self assert: declaration value equals: Color red. 
+]
+
+{ #category : #'tests-selectors' }
+PssParserTest >> testComposedClassSelector [
+	| rule selector |
+	result := self parse: '.test-success {}'.
+	
+	self assert: result rules size equals: 1.
+	
+	rule := result rules first.
+	self assert: rule declarations isEmpty.
+	self assert: rule selectors size equals: 1.
+	
+	selector := rule selectors first.
+	
+	"Selector general tests"
+	self assert: selector isSimpleSelector.
+	self deny: selector matchesOnName.
+	self deny: selector matchesOnId.
+	self assert: selector pseudoClassCount equals: 0.
+	
+	"Selecor class tests"
+	self assert: selector matchesOnStyleClass.
+	self assert: selector styleClassCount equals: 1.
+	self assert: selector styleClasses first equals: #testSuccess.
+]
+
+{ #category : #'tests-selectors' }
+PssParserTest >> testDescendantSelector [
+	| rule selector selector1 selector2 |
+	result := self parse: 'li a {}'.
+	
+	self assert: result rules size equals: 1.
+	
+	rule := result rules first.
+	self assert: rule declarations isEmpty.
+	self assert: rule selectors size equals: 1.
+	
+	selector := rule selectors first.
+	
+	self assert: selector isSimpleSelector not.
+	
+	"Selector 1"
+	selector1 := selector selectors first.
+	self assert: selector1 matchesOnName.
+	self assert: selector1 name equals: #li.
+	self deny: selector1 matchesOnStyleClass.
+	self deny: selector1 matchesOnId.
+	self assert: selector1 pseudoClassCount equals: 0.
+	
+	"Selector 2"
+	selector2 := selector selectors second.
+	self assert: selector2 matchesOnName.
+	self assert: selector2 name equals: #a.
+	self deny: selector2 matchesOnStyleClass.
+	self deny: selector2 matchesOnId.
+	self assert: selector2 pseudoClassCount equals: 0.
+	
+	"Relationship"
+	self assert: selector relationships size equals: 1.
+	self assert: selector relationships first isDescendant.
+	
 ]
 
 { #category : #'tests-font' }

@@ -6,6 +6,7 @@ Class {
 		'file',
 		'rules',
 		'medias',
+		'animations',
 		'origin'
 	],
 	#category : #'PharoStylesheet-Core'
@@ -31,6 +32,19 @@ PssStylesheet >> <= aStylesheet [
 { #category : #comparing }
 PssStylesheet >> >= aStylesheet [
 	^ self origin >= aStylesheet origin
+]
+
+{ #category : #accessing }
+PssStylesheet >> animations [
+	^ animations
+]
+
+{ #category : #accessing }
+PssStylesheet >> animations: aCollection [
+	aCollection
+		do: [ :a | 
+			a stylesheet: self.
+			self animations add: a ]
 ]
 
 { #category : #accessing }
@@ -60,6 +74,7 @@ PssStylesheet >> initialize [
 	super initialize.
 	rules := OrderedCollection new.
 	medias := OrderedCollection new.
+	animations := OrderedCollection new.
 	origin := PssOrigin USER
 ]
 

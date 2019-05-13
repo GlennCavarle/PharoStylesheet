@@ -9,6 +9,59 @@ PssParserTest >> parserClass [
 	^ PssParser
 ]
 
+{ #category : #'tests-animation' }
+PssParserTest >> testAnimationCode1 [
+	| animation keyframe |
+	result := self parse: '@keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}'.
+
+	self assert: result animations isNotEmpty.
+	self assert: result animations size equals: 1. 
+	
+	animation := result animations first.
+	self assert: animation name equals: #example.
+	self assert: animation keyframes size equals: 2.
+	
+	keyframe := animation keyframes first.
+	self assert: keyframe percentage equals: (PssValue percent: 0).
+	self assert: keyframe declarations size equals: 1.
+	self assert: keyframe declarations first property equals: #backgroundColor.
+	
+	keyframe := animation keyframes second.
+	self assert: keyframe percentage equals: (PssValue percent: 100).
+	self assert: keyframe declarations size equals: 1.
+	self assert: keyframe declarations first property equals: #backgroundColor.
+]
+
+{ #category : #'tests-animation' }
+PssParserTest >> testAnimationCode2 [
+	| animation keyframe |
+	result := self parse: '@keyframes example {
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}'.
+
+	self assert: result animations isNotEmpty.
+	self assert: result animations size equals: 1. 
+	
+	animation := result animations first.
+	self assert: animation name equals: #example.
+	self assert: animation keyframes size equals: 5.
+	
+	keyframe := animation keyframes first.
+	self assert: keyframe percentage equals: (PssValue percent: 0).
+	self assert: keyframe declarations size equals: 3.
+	
+	keyframe := animation keyframes third.
+	self assert: keyframe percentage equals: (PssValue percent: 50).
+	self assert: keyframe declarations size equals: 3.
+]
+
 { #category : #'tests-background' }
 PssParserTest >> testBackgroundColor [
 	| rule declaration |

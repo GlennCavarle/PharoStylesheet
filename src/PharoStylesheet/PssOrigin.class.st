@@ -4,22 +4,22 @@ Class {
 	#category : #'PharoStylesheet-Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #origins }
 PssOrigin class >> AUTHOR [
-	^ CSSAuthorOrigin
+	^ PssAuthorOrigin
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #origins }
 PssOrigin class >> INLINE [
-	^ CSSInlineOrigin
+	^ PssInlineOrigin
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #origins }
 PssOrigin class >> USER [
-	^ CSSUserOrigin
+	^ PssUserOrigin
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #origins }
 PssOrigin class >> USER_AGENT [
-	^ CSSUserAgentOrigin
+	^ PssUserAgentOrigin
 ]

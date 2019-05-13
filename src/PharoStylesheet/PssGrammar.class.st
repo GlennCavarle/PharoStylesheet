@@ -55,7 +55,13 @@ Class {
 		'mediaSeparatorToken',
 		'mediaConditions',
 		'mediaTypeWithConditions',
-		'percentSymbol'
+		'percentSymbol',
+		'keyframes',
+		'keyframesSelector',
+		'fromToken',
+		'toToken',
+		'keyframe',
+		'percentValue'
 	],
 	#category : #'PharoStylesheet-Parser'
 }
@@ -146,6 +152,11 @@ PssGrammar >> fontSizeToken [
 	^ ((integer , 'pt' asParser) / (number , 'em' asParser) / (number , 'rem' asParser)) token
 ]
 
+{ #category : #tokens }
+PssGrammar >> fromToken [
+	^ 'from' asParser token
+]
+
 { #category : #'grammar value' }
 PssGrammar >> function [
 	^ ident, $( asParser , (functionArgs separatedBy: $, asParser) , $) asParser
@@ -194,6 +205,21 @@ PssGrammar >> importantIdent [
 { #category : #primitives }
 PssGrammar >> integer [
 	^ ($- asParser optional , ($0 asParser / #digit asParser plus)) flatten
+]
+
+{ #category : #'grammar keyframes' }
+PssGrammar >> keyframe [
+	^ keyframesSelector trim, ${ asParser, declarations trim, $} asParser trim
+]
+
+{ #category : #'grammar keyframes' }
+PssGrammar >> keyframes [
+	^ '@keyframes' asParser trim , identToken, (${ asParser, keyframe plus, $} asParser) trim
+]
+
+{ #category : #'grammar keyframes' }
+PssGrammar >> keyframesSelector [
+	^ percentValue / fromToken / toToken
 ]
 
 { #category : #tokens }
@@ -284,7 +310,12 @@ PssGrammar >> percentSymbol [
 
 { #category : #tokens }
 PssGrammar >> percentToken [
-	^ (integer , percentSymbol) token
+	^ percentValue token
+]
+
+{ #category : #tokens }
+PssGrammar >> percentValue [
+	^ integer , percentSymbol
 ]
 
 { #category : #'grammar declaration' }
@@ -344,7 +375,12 @@ PssGrammar >> stringToken [
 
 { #category : #grammar }
 PssGrammar >> stylesheet [
-	^ (rule / media) plus
+	^ (rule / media / keyframes) plus
+]
+
+{ #category : #tokens }
+PssGrammar >> toToken [
+	^ 'to' asParser token
 ]
 
 { #category : #'grammar value' }

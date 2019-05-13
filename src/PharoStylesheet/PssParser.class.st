@@ -80,6 +80,11 @@ PssParser >> float [
 	^ super float  ==> [ :nodes | Number readFrom: nodes ]
 ]
 
+{ #category : #'grammar declaration' }
+PssParser >> fromToken [
+	^ super fromToken ==> [ :nodes | Array with: 0 with: 'percent' ]
+]
+
 { #category : #'grammar value' }
 PssParser >> function [
 	^ super function
@@ -145,6 +150,27 @@ PssParser >> identToken [
 { #category : #primitives }
 PssParser >> integer [
 	^ super integer  ==> [ :nodes | Number readFrom: nodes ]
+]
+
+{ #category : #'grammar keyframes' }
+PssParser >> keyframe [
+	^ super keyframe ==> [ :nodes | 
+		PssKeyframe new
+			percentage: (PssValue percent: nodes first first);
+			declarations: nodes third.] 
+]
+
+{ #category : #'grammar keyframes' }
+PssParser >> keyframes [
+	^ super keyframes ==> [ :nodes | 
+		PssAnimation new
+			name: nodes second;
+			keyframes: nodes third second ] 
+]
+
+{ #category : #'grammar keyframes' }
+PssParser >> keyframesSelector [
+	^ super keyframesSelector ==> [ :nodes | nodes ] 
 ]
 
 { #category : #'grammar value' }
@@ -292,6 +318,11 @@ PssParser >> stylesheet [
 			ss := PssStylesheet new.
 			nodes do: [ :item | item addTo: ss ].
 			ss ]
+]
+
+{ #category : #'grammar declaration' }
+PssParser >> toToken [
+	^ super toToken ==> [ :nodes | Array with: 100 with: 'percent'  ]
 ]
 
 { #category : #'grammar value' }
